@@ -53,13 +53,3 @@ $tile-height: $tile-width;
 
 	outline: 1px solid #b4b4b4;
 }
-
-.line {
-	width: 112px;
-    height: 47px;
-    border-bottom: 1px solid red;
-    -webkit-transform:
-        translateY(-20px)
-        translateX(5px)
-        rotate(27deg); 
-}
