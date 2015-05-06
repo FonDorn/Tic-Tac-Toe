@@ -10,6 +10,16 @@ var _size 		= 9;
 var _tilesCount = 1;
 var _gameOver 	= false;
 var _draw		= false;
+var _coordinates = {
+	moveTo: {
+		x: 0,
+		y: 0
+	},
+	lineTo: {
+		x: 0,
+		y: 0	
+	}
+};
 
 // Init
 function init() {
@@ -62,68 +72,141 @@ function changeTurn(index) {
 		_turn === 'x' ? _turn = 'o': _turn = 'x';
 }
 
+// Get Coordinates
+function getCoordinates(moveToX, moveToY, lineToX, lineToY) {
+	_coordinates.moveTo.x = moveToX;
+	_coordinates.moveTo.y = moveToY;
+
+	_coordinates.lineTo.x = lineToX;
+	_coordinates.lineTo.y = lineToY;
+
+}
+
 // Check if GameOver
 function checkGameOver(index) {
 
 	switch(index) {
 		case 0:
-			if(( _tiles[0].status === _tiles[1].status && _tiles[1].status === _tiles[2].status ) || 
-			   ( _tiles[0].status === _tiles[3].status && _tiles[3].status === _tiles[6].status ) ||
-			   ( _tiles[0].status === _tiles[4].status && _tiles[4].status === _tiles[8].status ))
-				_gameOver = true;
+			if ( _tiles[0].status === _tiles[1].status && _tiles[1].status === _tiles[2].status ) {
+					_gameOver = true;
+					getCoordinates(0,25,300,25);
+				} 
+			else if ( _tiles[0].status === _tiles[3].status && _tiles[3].status === _tiles[6].status ) {
+					_gameOver = true;
+					getCoordinates(50,0,50,200);
+				}
+			else if ( _tiles[0].status === _tiles[4].status && _tiles[4].status === _tiles[8].status ) {
+					_gameOver = true;
+					getCoordinates(0,0,600,300);
+				}
 			break;
 
 		case 1:
-			if(( _tiles[1].status === _tiles[0].status && _tiles[0].status === _tiles[3].status ) || 
-			   ( _tiles[1].status === _tiles[4].status && _tiles[4].status === _tiles[7].status ))
+			if ( _tiles[1].status === _tiles[0].status && _tiles[0].status === _tiles[2].status ) {
 				_gameOver = true;
+				getCoordinates(0,25,300,25);
+			}
+			else if ( _tiles[1].status === _tiles[4].status && _tiles[4].status === _tiles[7].status ) {
+					_gameOver = true;
+					getCoordinates(150,0,150,200);
+				}
 			break;
 
 		case 2:
-			if(( _tiles[2].status === _tiles[4].status && _tiles[4].status === _tiles[6].status ) || 
-			   ( _tiles[2].status === _tiles[1].status && _tiles[1].status === _tiles[0].status ) ||
-			   ( _tiles[2].status === _tiles[5].status && _tiles[5].status === _tiles[8].status ))
+			if ( _tiles[2].status === _tiles[4].status && _tiles[4].status === _tiles[6].status ) {
 				_gameOver = true;
+				getCoordinates(0,150,300,0);
+			} 
+			else if ( _tiles[2].status === _tiles[1].status && _tiles[1].status === _tiles[0].status ) {
+			   	_gameOver = true;
+				getCoordinates(0,25,300,25);
+			   }
+			else if ( _tiles[2].status === _tiles[5].status && _tiles[5].status === _tiles[8].status ) {
+				_gameOver = true;
+				getCoordinates(250,0,250,200);
+			}
 			break;
 
 		case 3:
-			if(( _tiles[3].status === _tiles[0].status && _tiles[0].status === _tiles[6].status ) || 
-			   ( _tiles[3].status === _tiles[4].status && _tiles[4].status === _tiles[5].status ))
+			if ( _tiles[3].status === _tiles[0].status && _tiles[0].status === _tiles[6].status ) {
 				_gameOver = true;
+				getCoordinates(50,0,50,200);
+			}
+			else if ( _tiles[3].status === _tiles[4].status && _tiles[4].status === _tiles[5].status ) {
+					_gameOver = true;
+					getCoordinates(0,75,300,75);
+				}
 			break;
 
 		case 4:
-			if(( _tiles[4].status === _tiles[0].status && _tiles[0].status === _tiles[8].status ) || 
-			   ( _tiles[4].status === _tiles[2].status && _tiles[2].status === _tiles[6].status ) ||
-			   ( _tiles[4].status === _tiles[1].status && _tiles[1].status === _tiles[7].status ) ||
-			   ( _tiles[4].status === _tiles[3].status && _tiles[3].status === _tiles[5].status ))
+			if ( _tiles[4].status === _tiles[0].status && _tiles[0].status === _tiles[8].status ) {
 				_gameOver = true;
+				getCoordinates(0,0,600,300);
+			} 
+			else if ( _tiles[4].status === _tiles[2].status && _tiles[2].status === _tiles[6].status ) {
+				_gameOver = true;
+				getCoordinates(0,150,300,0)
+			   }
+			else if ( _tiles[4].status === _tiles[1].status && _tiles[1].status === _tiles[7].status ) {
+				_gameOver = true;
+				getCoordinates(150,0,150,200)
+			   }
+			else if ( _tiles[4].status === _tiles[3].status && _tiles[3].status === _tiles[5].status ) {
+					_gameOver = true;
+					getCoordinates(0,75,300,75);
+				}
 			break;
 
 		case 5:
-			if(( _tiles[5].status === _tiles[2].status && _tiles[2].status === _tiles[8].status ) || 
-			   ( _tiles[5].status === _tiles[4].status && _tiles[4].status === _tiles[3].status ))
+			if ( _tiles[5].status === _tiles[2].status && _tiles[2].status === _tiles[8].status ) {
 				_gameOver = true;
+				getCoordinates(250,0,600,300);
+			} 
+			else if ( _tiles[5].status === _tiles[4].status && _tiles[4].status === _tiles[3].status ) {
+					_gameOver = true;
+					getCoordinates(0,75,300,75);
+				}
 			break;
 
 		case 6:
-			if(( _tiles[6].status === _tiles[3].status && _tiles[3].status === _tiles[0].status ) || 
-			   ( _tiles[6].status === _tiles[7].status && _tiles[7].status === _tiles[8].status ) ||
-			   ( _tiles[6].status === _tiles[4].status && _tiles[4].status === _tiles[2].status ))
+			if ( _tiles[6].status === _tiles[3].status && _tiles[3].status === _tiles[0].status ) {
 				_gameOver = true;
+				getCoordinates(50,0,50,200);
+			} 
+			else if ( _tiles[6].status === _tiles[7].status && _tiles[7].status === _tiles[8].status ) {
+				_gameOver = true;
+				getCoordinates(0,125,300,125);
+			}
+			else if ( _tiles[6].status === _tiles[4].status && _tiles[4].status === _tiles[2].status ) {
+					_gameOver = true;
+					getCoordinates(0,150,300,0);
+				}
 			break;
 
 		case 7:
-			if(( _tiles[7].status === _tiles[6].status && _tiles[6].status === _tiles[8].status ) || 
-			   ( _tiles[7].status === _tiles[4].status && _tiles[4].status === _tiles[1].status ))
+			if ( _tiles[7].status === _tiles[6].status && _tiles[6].status === _tiles[8].status ) {
 				_gameOver = true;
+				getCoordinates(0,125,300,125);
+			} 
+			else if ( _tiles[7].status === _tiles[4].status && _tiles[4].status === _tiles[1].status ) {
+					_gameOver = true;
+					getCoordinates(150,0,150,200);
+				}
 			break;
 
 		case 8:
-			if(( _tiles[8].status === _tiles[7].status && _tiles[7].status === _tiles[6].status ) || 
-			   ( _tiles[8].status === _tiles[5].status && _tiles[5].status === _tiles[2].status ) ||
-			   ( _tiles[8].status === _tiles[4].status && _tiles[4].status === _tiles[0].status ))
+			if ( _tiles[8].status === _tiles[7].status && _tiles[7].status === _tiles[6].status ) {
 				_gameOver = true;
+				getCoordinates(0,125,300,125);
+			} 
+			else if ( _tiles[8].status === _tiles[5].status && _tiles[5].status === _tiles[2].status ) {
+			   	_gameOver = true;
+				getCoordinates(250,0,250,200);
+			   }
+			else if ( _tiles[8].status === _tiles[4].status && _tiles[4].status === _tiles[0].status ) {
+					_gameOver = true;
+					getCoordinates(0,0,600,300);
+				}
 			break;
 	}
 }
@@ -149,6 +232,11 @@ var AppStore = _.extend({}, EventEmitter.prototype, {
 	// Get Draw
 	getDraw: function() {
 		return _draw;
+	},
+
+	// Get Coordinates
+	getCoordinates: function() {
+		return _coordinates;
 	},
 
 	// Emit Change event

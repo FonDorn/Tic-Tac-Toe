@@ -6,7 +6,10 @@ var TicTacMenu	= require('./TicTacMenu.jsx');
 // Initial
 function getState() {
 	return {
-		tiles: AppStore.getTiles()
+		tiles: AppStore.getTiles(),
+		gameOver: AppStore.getGameOver(),
+		draw: AppStore.getDraw(),
+		coordinates: AppStore.getCoordinates()
 	};
 }
 
@@ -32,8 +35,30 @@ var TicTacApp = React.createClass({
 	},
 
 	render: function(){
+
+		var c = document.getElementById("canvas");
+
+		if(this.state.gameOver && !this.state.draw) {
+			c.style.display="block";
+			var ctx = c.getContext("2d");
+			ctx.clearRect ( 0 , 0 , canvas.width, canvas.height );
+			ctx.beginPath();
+			ctx.moveTo(this.state.coordinates.moveTo.x,this.state.coordinates.moveTo.y);
+			ctx.lineTo(this.state.coordinates.lineTo.x,this.state.coordinates.lineTo.y);
+			ctx.strokeStyle = "#ff0000";
+			ctx.lineWidth = 2;
+			ctx.lineCap = "round"; 
+			ctx.stroke();
+		}
+		else if(c) {
+				c.style.display="none";
+		} 
+
+
 		return (
 			<div>
+				<canvas id="canvas">
+				</canvas>
 				<div className="tic-tac-app">
 					{this.state.tiles.map(function(tile,position){
 						return (
@@ -41,9 +66,7 @@ var TicTacApp = React.createClass({
 						)
 					})}
 				</div>
-				
 				<TicTacMenu />
-
 			</div>
 		);
 	}

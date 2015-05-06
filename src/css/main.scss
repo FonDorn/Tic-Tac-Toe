@@ -38,6 +38,15 @@ $tile-height: $tile-width;
 
 }
 
+#canvas {
+	width: $app-width;
+	height: $app-height;
+
+	position: absolute;
+
+	display: none;
+}
+
 .tile {
 	width: $tile-width;
 	height: $tile-height;
@@ -52,14 +61,4 @@ $tile-height: $tile-width;
 	cursor: pointer;
 
 	outline: 1px solid #b4b4b4;
-}
-
-.line {
-	width: 112px;
-    height: 47px;
-    border-bottom: 1px solid red;
-    -webkit-transform:
-        translateY(-20px)
-        translateX(5px)
-        rotate(27deg); 
 }
